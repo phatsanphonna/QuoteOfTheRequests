@@ -10,6 +10,7 @@ export default function Home({ sentence, name }) {
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
                 <title>Create Next App</title>
+                <meta property="og:title" content='Quote of the Request' />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
@@ -34,10 +35,10 @@ export default function Home({ sentence, name }) {
 
 export async function getServerSideProps() {
     const req = await getJokes()
-    console.log(req)
+    // console.log(req)
     const data = req[Math.floor(Math.random() * req.length)]
 
-    console.log(data.sentence)
+    // console.log('Req' + data.name)
 
     if (!req) {
         return {
@@ -46,6 +47,6 @@ export async function getServerSideProps() {
     }
 
     return {
-        props: { sentence: data.sentence, name: data.name }
+        props: data
     }
 }

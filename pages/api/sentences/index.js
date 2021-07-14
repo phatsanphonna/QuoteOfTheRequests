@@ -6,7 +6,16 @@ dbConnect()
 export async function getJokes() {
     try {
         const sentences = await Sentence.find({})
-        return sentences
+        // console.log('getJokes(): ' + sentences[0])
+
+        let data = []
+
+        for (let i = 0; i < sentences.length; i++) {
+            data.push({ sentenceId: sentences[i].sentenceId, sentence: sentences[i].sentence, name: sentences[i].name })
+        }
+        // console.log(data)
+
+        return data
     } catch (err) {
         console.log(err)
     }
@@ -15,7 +24,6 @@ export async function getJokes() {
 export async function postJokes(body) {
     try {
         const sentence = await Sentence.create(body)
-        return { sentenceId: sentence.sentenceId, sentence: sentence.sentence }
     } catch (err) {
         console.log(err)
     }
