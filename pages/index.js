@@ -20,7 +20,7 @@ export default function Home({ sentence, name }) {
 
             <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
                 <h1 className='text-xl italic m-11'>มุขจิปาถะ of request</h1>
-                <h3 className='text-3xl italic font-bold m-11'>{sentence}</h3>
+                <h3 className='text-3xl font-bold m-11'>- “ {sentence} ”</h3>
                 <h3 className='text-lg font-light m-11'>โดย {name}</h3>
                 <button>Refresh</button>
             </main>
