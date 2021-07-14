@@ -9,8 +9,9 @@ export default function Home({ sentence, name }) {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
-                <title>Create Next App</title>
-                <meta property="og:title" content='Quote of the Request' />
+                <title>Quote of the Request</title>
+                <meta property="og:title" content='Quote of the Request' key='title' />
+                <meta property="og:description" content='Quote of the Request by ssuniie' />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
