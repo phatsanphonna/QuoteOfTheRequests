@@ -29,7 +29,7 @@ export default function Home({ quote, name, bgColor }) {
             <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
                 <div className='text-white drop-shadow-2xl'>
                     <h3 className='text-xl italic m-11'>Quote of the Request</h3>
-                    <h1 className='text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold m-11' style={{ lineHeight: '5rem' }}>
+                    <h1 className='text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold m-11 line-height-3'>
                         - “ {quote} ”</h1>
                     <h3 className='text-lg font-light'>โดย {name}</h3>
                 </div>

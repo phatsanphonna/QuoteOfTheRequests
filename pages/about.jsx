@@ -17,7 +17,7 @@ export default function about() {
 
             <main className={mainTagTailwindCSS}>
                 <div className="title">
-                    <h1 className='text-5xl font-bold m-11 drop-shadow-2xl' style={{ lineHeight: '4rem' }}>
+                    <h1 className='text-5xl font-bold m-11 drop-shadow-2xl line-height-3'>
                         - “ พวกมึงเคยเป็นป้ะ เวลาอยากเล่นมุข แต่คิดไม่ออกว่าจะเล่นมุขอะไรอ่ะ ”
                     </h1>
                     <p className='text-lg font-normal m-5'>
