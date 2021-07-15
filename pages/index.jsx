@@ -13,7 +13,7 @@ export default function Home({ quote, name, bgColor }) {
     }
 
     const mainTailwindCSS = (
-        'flex flex-col items-center justify-center min-h-screen py-2 sm:36 md:px-80 ' + `bg-gradient-to-r from-red-400 to-yellow-500`
+        'flex flex-col items-center justify-center min-h-screen py-2 ' + `bg-gradient-to-r from-red-400 to-yellow-500`
     )
     return (
         <div className={mainTailwindCSS}>

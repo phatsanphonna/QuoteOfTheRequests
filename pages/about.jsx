@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 export default function about() {
     const mainDivTailwindCSS = (
-        'flex flex-col items-center justify-center min-h-screen py-2 sm:36 md:px-80 ' + `bg-gradient-to-tr from-pink-500 to-yellow-400`
+        'flex flex-col items-center justify-center min-h-screen py-2 px-80 ' + `bg-gradient-to-tr from-pink-500 to-yellow-400`
     )
     const mainTagTailwindCSS = (
         'flex flex-col items-center justify-center w-full flex-1 px-20 md:px-64 lg:px-80 text-center text-white'
