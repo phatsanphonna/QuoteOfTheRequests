@@ -21,6 +21,24 @@ export async function getJokes() {
     }
 }
 
+export async function getRandomJokes() {
+    try {
+        const sentences = await Sentence.find({})
+        // console.log('getJokes(): ' + sentences[0])
+
+        let data = []
+
+        for (let i = 0; i < sentences.length; i++) {
+            data.push({ sentenceId: sentences[i].sentenceId, sentence: sentences[i].sentence, name: sentences[i].name })
+        }
+        // console.log(data)
+
+        return data[Math.floor(Math.random() * data.length)]
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 export async function postJokes(body) {
     try {
         const sentence = await Sentence.create(body)
