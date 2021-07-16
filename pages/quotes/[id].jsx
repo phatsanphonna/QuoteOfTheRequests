@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import { getJokes, getAllJokes } from '../api/jokes'
 import { randomGradientBackground } from '../../utils/randomGradientBG'
@@ -15,6 +16,11 @@ export default function PostId({ quote, quoteId, name, category, bgColor }) {
     const mainTagTailwindCSS = (
         'flex flex-col items-center justify-center w-full flex-1 px-20 md:px-64 lg:px-82 xl:px-96 text-center text-white'
     )
+    const router = useRouter();
+
+    if (router.isFallback) {
+        return <div>loading...</div>
+    }
 
     return (
         <div className={mainDivTailwindCSS}>
@@ -28,7 +34,7 @@ export default function PostId({ quote, quoteId, name, category, bgColor }) {
             <Header />
 
             <main className={mainTagTailwindCSS}>
-                <QuoteInfoCards quote={quote} quoteId={quoteId} name={name} category={category}/>
+                <QuoteInfoCards quote={quote} quoteId={quoteId} name={name} category={category} />
             </main>
 
             <Footer />
@@ -44,7 +50,7 @@ export async function getStaticPaths() {
     })
     return {
         paths: possiblePaths,
-        fallback: false
+        fallback: true
     };
 }
 
