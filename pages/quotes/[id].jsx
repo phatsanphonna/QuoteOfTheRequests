@@ -4,13 +4,14 @@ import { useRouter } from 'next/router'
 
 import { getJokes, getAllJokes } from '../api/jokes'
 import { randomGradientBackground } from '../../utils/randomGradientBG'
+import { formatDate } from '../../utils/formatDate'
 
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import QuoteInfoCards from '../../components/QuoteInfoCard'
 import Loading from '../../components/Loading'
 
-export default function PostId({ quote, quoteId, name, category, bgColor }) {
+export default function PostId({ quote, quoteId, name, category, date, bgColor }) {
     const mainDivTailwindCSS = (
         `flex flex-col items-center justify-center min-h-screen py-2 ${bgColor}`
     )
@@ -35,7 +36,7 @@ export default function PostId({ quote, quoteId, name, category, bgColor }) {
             <Header />
 
             <main className={mainTagTailwindCSS}>
-                <QuoteInfoCards quote={quote} quoteId={quoteId} name={name} category={category} />
+                <QuoteInfoCards quote={quote} quoteId={quoteId} name={name} category={category} date={date} />
             </main>
 
             <Footer />
@@ -58,8 +59,12 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     try {
         const req = await getJokes(params.id)
-        // console.log('Req: ' + req.sentence)
-        // const randomBgColor = randomGradientBackground()
+
+        // Format Date
+        const d = new Date(req.date)
+        req.date = `${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`
+
+        // Get Background Color
         const randomBgColor = 'bg-gradient-to-r from-red-200 via-red-300 to-yellow-200'
 
         const response = {
@@ -67,6 +72,7 @@ export async function getStaticProps({ params }) {
             quoteId: req.sentenceId,
             name: req.name,
             category: req.category,
+            date: req.date,
             bgColor: randomBgColor
         }
 
