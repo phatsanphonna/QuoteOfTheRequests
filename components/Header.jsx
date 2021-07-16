@@ -15,7 +15,7 @@ export default function Header({ indexPage = false }) {
       <Link href='/about'><a className='text-white hover:underline'>เกี่ยวกับ</a></Link>
       <Link href='/API'><a className='text-white hover:underline'>สำหรับนักพัฒนา</a></Link>
       <button
-        className='repo py-2 px-6 rounded-full bg-white hover:bg-pink-400 hover:text-white text-purple-500'>
+        className='transition-all repo py-2 px-6 rounded-full bg-white hover:bg-pink-400 hover:text-white text-purple-500'>
         <a href='https://forms.gle/utTM8Yqw8R4VVD4d8' rel="noopener noreferrer" target="_blank">
           มีมุข หรือ คำคมที่โดน ๆ</a>
       </button>

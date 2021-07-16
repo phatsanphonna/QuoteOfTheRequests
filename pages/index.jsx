@@ -2,11 +2,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Router from 'next/router'
 
-import { getRandomJokes } from './api/jokes'
+import { getRandomJokes } from '../utils/databaseQuery/findData'
 import { randomGradientBackground } from '../utils/randomGradientBG'
 
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Header from '@components/Header'
+import Footer from '@components/Footer'
 
 export default function Home({ quote, name, bgColor }) {
     const reloadPage = () => {

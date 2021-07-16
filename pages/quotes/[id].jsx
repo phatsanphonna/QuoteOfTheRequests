@@ -2,14 +2,12 @@ import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { getJokes, getAllJokes } from '../api/jokes'
-import { randomGradientBackground } from '../../utils/randomGradientBG'
-import { formatDate } from '../../utils/formatDate'
+import { getJokes, getAllJokes } from '@utils/databaseQuery/findData'
 
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-import QuoteInfoCards from '../../components/QuoteInfoCard'
-import Loading from '../../components/Loading'
+import Header from '@components/Header'
+import Footer from '@components/Footer'
+import QuoteInfoCards from '@components/QuoteInfoCard'
+import Loading from '@components/Loading'
 
 export default function PostId({ quote, quoteId, name, category, date, bgColor, prevQuote, nextQuote }) {
     const mainDivTailwindCSS = (

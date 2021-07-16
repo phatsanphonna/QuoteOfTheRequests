@@ -1,25 +1,27 @@
 import React from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
+
+import loading from '@public/loading.svg'
 
 export default function Loading() {
-    const mainDivTailwindCSS = (
-        `flex flex-col items-center justify-center min-h-screen py-2 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200`
-    )
-    const mainTagTailwindCSS = (
-        'flex flex-col items-center justify-center w-full flex-1 px-20 md:px-64 lg:px-82 xl:px-96 text-center text-white'
-    )
+  const mainDivTailwindCSS = (
+    `flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-red-200 via-red-300 to-yellow-200`
+  )
+  const mainTagTailwindCSS = (
+    'flex items-center justify-center w-full drop-shadow-2xl'
+  )
 
-    return (
-        <div className={mainDivTailwindCSS}>
-            <Head>
-                <title>Quote of the Request | Loading</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+  return (
+    <div className={mainDivTailwindCSS}>
+      <Head>
+        <title>Quote of the Request | Loading</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-            <main className={mainTagTailwindCSS}>
-                <h1 className='text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold m-11 tracking-widest drop-shadow-2xl'>
-                    . . .</h1>
-            </main>
-        </div>
-    )
+      <main className={mainTagTailwindCSS}>
+        <Image src={loading} alt="Picture of the author" className='m-11 animate-spin drop-shadow-sm' />
+      </main>
+    </div>
+  )
 }
