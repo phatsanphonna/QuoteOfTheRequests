@@ -3,7 +3,7 @@ import { postJokes } from '@utils/databaseQuery/addData'
 
 export default async function handler(req, res) {
   const { method } = req
-
+  
   switch (method) {
     case 'GET':
       try {

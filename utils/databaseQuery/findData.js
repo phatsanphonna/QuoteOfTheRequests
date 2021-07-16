@@ -58,7 +58,7 @@ export async function getGreaterThanLimitJokes(start, limit = 10) {
         const sentences = rawSentences.map(sentence => {
             return { sentenceId: sentence.sentenceId, sentence: sentence.sentence, name: sentence.name }
         })
-        console.log(sentences)
+        // console.log(sentences)
 
         return sentences
     } catch (err) {
@@ -73,7 +73,7 @@ export async function getLowerThanLimitJokes(start, limit = 10) {
         const sentences = rawSentences.map(sentence => {
             return { sentenceId: sentence.sentenceId, sentence: sentence.sentence, name: sentence.name }
         })
-        console.log(sentences)
+        // console.log(sentences)
         
         return sentences
     } catch (err) {
