@@ -62,7 +62,7 @@ export async function getStaticProps({ params }) {
 
         // Format Date
         const d = new Date(req.date)
-        req.date = `${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`
+        req.date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`
 
         // Get Background Color
         const randomBgColor = 'bg-gradient-to-r from-red-200 via-red-300 to-yellow-200'
