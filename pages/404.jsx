@@ -14,7 +14,8 @@ export default function Loading() {
     return (
         <div className={mainDivTailwindCSS}>
             <Head>
-                <title>Quote of the Request | Loading</title>
+                <title>Quote of the Request | 404</title>
+                <meta property="og:title" content={`404 | Quote of the Request`} key='title' />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
