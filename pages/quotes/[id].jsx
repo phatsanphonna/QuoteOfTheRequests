@@ -56,26 +56,32 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const req = await getJokes(params.id)
-    // console.log('Req: ' + req.sentence)
-    // const randomBgColor = randomGradientBackground()
-    const randomBgColor = 'bg-gradient-to-r from-red-200 via-red-300 to-yellow-200'
+    try {
+        const req = await getJokes(params.id)
+        // console.log('Req: ' + req.sentence)
+        // const randomBgColor = randomGradientBackground()
+        const randomBgColor = 'bg-gradient-to-r from-red-200 via-red-300 to-yellow-200'
 
-    const response = {
-        quote: req.sentence,
-        quoteId: req.sentenceId,
-        name: req.name,
-        category: req.category,
-        bgColor: randomBgColor
-    }
-
-    if (!req) {
-        return {
-            notFound: true,
+        const response = {
+            quote: req.sentence,
+            quoteId: req.sentenceId,
+            name: req.name,
+            category: req.category,
+            bgColor: randomBgColor
         }
-    }
 
-    return {
-        props: response
+        if (!req) {
+            return {
+                notFound: true,
+            }
+        }
+
+        return {
+            props: response
+        }
+    } catch (err) {
+        return {
+            notFound: true
+        }
     }
 }
