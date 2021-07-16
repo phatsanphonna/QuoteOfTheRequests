@@ -8,6 +8,7 @@ import { randomGradientBackground } from '../../utils/randomGradientBG'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import QuoteInfoCards from '../../components/QuoteInfoCard'
+import Loading from '../../components/Loading'
 
 export default function PostId({ quote, quoteId, name, category, bgColor }) {
     const mainDivTailwindCSS = (
@@ -19,7 +20,7 @@ export default function PostId({ quote, quoteId, name, category, bgColor }) {
     const router = useRouter();
 
     if (router.isFallback) {
-        return <div>loading...</div>
+        return <Loading />
     }
 
     return (
