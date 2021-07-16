@@ -1,21 +1,37 @@
 import dbConnect from "../../../utils/dbConnect"
 import Sentence from '../../../models/Sentence'
-
+import { stringToEnumCategory, enumToStringCategory } from '../../../utils/convertCategory'
 dbConnect()
 
-export async function getJokes() {
+export async function getJokes(quoteId) {
     try {
-        const sentences = await Sentence.find({})
-        // console.log('getJokes(): ' + sentences[0])
+        const sentence = await Sentence.findOne({ sentenceId: Number(quoteId) })
+        const sentenceCategory = enumToStringCategory(sentence.category)
 
-        let data = []
+        // console.log('Sentence : ' + sentence)
+        // console.log('Sentence Category : ' + sentence.category);
 
-        for (let i = 0; i < sentences.length; i++) {
-            data.push({ sentenceId: sentences[i].sentenceId, sentence: sentences[i].sentence, name: sentences[i].name })
+        return {
+            sentenceId: sentence.sentenceId,
+            sentence: sentence.sentence,
+            name: sentence.name,
+            date: sentence.date,
+            category: sentenceCategory
         }
-        // console.log(data)
 
-        return data
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export async function getAllJokes() {
+    try {
+        const rawSentences = await Sentence.find({})
+        const sentences = rawSentences.map(sentence => {
+            return { sentenceId: sentence.sentenceId, sentence: sentence.sentence, name: sentence.name }
+        })
+
+        return sentences
     } catch (err) {
         console.log(err)
     }
@@ -23,17 +39,11 @@ export async function getJokes() {
 
 export async function getRandomJokes() {
     try {
-        const sentences = await Sentence.find({})
-        // console.log('getJokes(): ' + sentences[0])
+        const rawSentences = await Sentence.find({})
+        // console.log(rawSentences)
+        const sentence = rawSentences[Math.floor(Math.random() * rawSentences.length)]
 
-        let data = []
-
-        for (let i = 0; i < sentences.length; i++) {
-            data.push({ sentenceId: sentences[i].sentenceId, sentence: sentences[i].sentence, name: sentences[i].name })
-        }
-        // console.log(data)
-
-        return data[Math.floor(Math.random() * data.length)]
+        return { sentenceId: sentence.sentenceId, sentence: sentence.sentence, name: sentence.name }
     } catch (err) {
         console.log(err)
     }
@@ -41,6 +51,9 @@ export async function getRandomJokes() {
 
 export async function postJokes(body) {
     try {
+        body.category = stringToEnumCategory(body.category)
+        // console.log('Post Jokes: ' + body);
+
         const sentence = await Sentence.create(body)
     } catch (err) {
         console.log(err)

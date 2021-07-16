@@ -14,9 +14,14 @@ const SentenceSchema = mongoose.Schema({
         default: Date.now()
     },
     name: {
-        'type': String,
+        type: String,
         require: false,
         default: 'ใครสักคนบนโลก'
+    },
+    category: {
+        type: [Number],
+        require: true,
+        default: [0]
     }
 })
 
