@@ -11,15 +11,15 @@ import Footer from '../../components/Footer'
 import QuoteInfoCards from '../../components/QuoteInfoCard'
 import Loading from '../../components/Loading'
 
-export default function PostId({ quote, quoteId, name, category, date, bgColor }) {
+export default function PostId({ quote, quoteId, name, category, date, bgColor, prevQuote, nextQuote }) {
     const mainDivTailwindCSS = (
         `flex flex-col items-center justify-center min-h-screen py-2 ${bgColor}`
     )
     const mainTagTailwindCSS = (
         'flex flex-col items-center justify-center w-full flex-1 px-20 md:px-64 lg:px-82 xl:px-96 text-center text-white'
     )
-    const router = useRouter();
 
+    const router = useRouter();
     if (router.isFallback) {
         return <Loading />
     }
@@ -36,7 +36,9 @@ export default function PostId({ quote, quoteId, name, category, date, bgColor }
             <Header />
 
             <main className={mainTagTailwindCSS}>
-                <QuoteInfoCards quote={quote} quoteId={quoteId} name={name} category={category} date={date} />
+                <QuoteInfoCards 
+                quote={quote} quoteId={quoteId} name={name} category={category} date={date} prevQuote={prevQuote}
+                nextQuote={nextQuote} />
             </main>
 
             <Footer />
@@ -59,6 +61,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     try {
         const req = await getJokes(params.id)
+        const prevQuote = await getJokes(Number(params.id) - 1)
+        const nextQuote = await getJokes(Number(params.id) + 1)
+
+        let isPrevQuoteExist, isNextQuoteExist
+        if (prevQuote) { isPrevQuoteExist = true } else { isPrevQuoteExist = false }
+
+        if (nextQuote) { isNextQuoteExist = true } else { isNextQuoteExist = false }
 
         // Format Date
         const d = new Date(req.date)
@@ -73,7 +82,9 @@ export async function getStaticProps({ params }) {
             name: req.name,
             category: req.category,
             date: req.date,
-            bgColor: randomBgColor
+            bgColor: randomBgColor,
+            prevQuote: isPrevQuoteExist,
+            nextQuote: isNextQuoteExist
         }
 
         if (!req) {
