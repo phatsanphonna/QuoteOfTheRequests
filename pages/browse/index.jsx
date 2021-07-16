@@ -23,7 +23,7 @@ export default function index({ data, getTotalQuotes }) {
     const getMoreQuotes = async () => {
       // console.log(getTotalQuotes - data.length)
       // console.log('Data Length: ' + data.length)
-      const res = await fetch(`/https://quotes.phatsanphon.site/api/jokes/limit?` + new URLSearchParams({
+      const res = await fetch(`https://quotes.phatsanphon.site/api/jokes/limit?` + new URLSearchParams({
         start: getTotalQuotes - quotes.length,
         limit: 5
       }))
