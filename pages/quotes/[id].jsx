@@ -44,7 +44,7 @@ export async function getStaticPaths() {
     })
     return {
         paths: possiblePaths,
-        fallback: false
+        fallback: true
     };
 }
 

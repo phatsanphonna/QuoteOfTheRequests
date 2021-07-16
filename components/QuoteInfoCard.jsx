@@ -3,7 +3,7 @@ import React from 'react'
 import CategoryButton from './CategoryButton'
 
 export default function QuoteInfoCards({ quote, quoteId, name, category }) {
-    console.log(category)
+    // console.log(category)
     const categoryButtons = category.map((c, index) => {
         return <CategoryButton index={index} category={c} />
     })

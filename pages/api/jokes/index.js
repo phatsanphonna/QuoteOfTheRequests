@@ -1,6 +1,7 @@
 import dbConnect from "../../../utils/dbConnect"
 import Sentence from '../../../models/Sentence'
 import { stringToEnumCategory, enumToStringCategory } from '../../../utils/convertCategory'
+
 dbConnect()
 
 export async function getJokes(quoteId) {
@@ -67,7 +68,7 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const sentences = await getJokes()
+                const sentences = await getRandomJokes()
                 res.status(200).json({ success: true, data: sentences })
             } catch (err) {
                 console.log(err)
