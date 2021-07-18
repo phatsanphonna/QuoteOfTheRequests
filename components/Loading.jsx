@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import loading from '@public/loading.svg'
+import loading from '@public/loading.png'
 
 export default function Loading() {
   const mainDivTailwindCSS = (
@@ -20,7 +20,7 @@ export default function Loading() {
       </Head>
 
       <main className={mainTagTailwindCSS}>
-        <Image src={loading} alt="Picture of the author" className='m-11 animate-spin drop-shadow-sm' />
+        <Image src={loading} className='m-11 animate-spin drop-shadow-sm' />
       </main>
     </div>
   )
