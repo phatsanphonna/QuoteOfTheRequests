@@ -8,6 +8,8 @@ import { getAllJokes, getLimitJokes } from '@utils/databaseQuery/findData'
 import LongQuoteInfoCard from '@components/LongQuoteInfoCard'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
+import NotFound from '../404'
+import Loading from '@components/Loading'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -24,13 +26,13 @@ export default function index({ data, getTotalQuotes }) {
     const [hasMore, setHasMore] = useState(true)
 
     const getMoreQuotes = async () => {
-      const res = await fetch(`https://quotes.phatsanphon.site/api/jokes/limit?` + new URLSearchParams({
-          start: getTotalQuotes - quotes.length,
-          limit: 5
-        }))
-      const newQuotes = await res.json()
+      const { newQuotes, error } = useSWR(`/api/jokes/limit?` + new URLSearchParams({
+        start: getTotalQuotes - quotes.length,
+        limit: 5
+      }), fetcher)
 
-      // console.log(newQuotes.data)
+      if(error) { return <NotFound />}
+      if(!newQuotes) { return <Loading /> }
 
       setQuotes(quotes => [...quotes, ...newQuotes.data])
     }
