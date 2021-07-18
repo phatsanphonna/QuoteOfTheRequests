@@ -11,13 +11,12 @@ export default function QuoteInfoCards({ quote, quoteId, name, date, category, p
     const navNextButton = 'repo py-2 px-6 rounded-full hover:bg-green-500 bg-green-100 text-gray-500 hover:text-white'
     const navPrevButton = 'repo py-2 px-6 rounded-full hover:bg-yellow-500 bg-yellow-100 text-gray-500 hover:text-white'
 
-    // if (nextQuote) {
-    //     nextQuote = (
-    //         <button className={'absolute bottom-0 right-0 m-10 ' + navNextButton}>
-    //             <Link href={`/quotes/${quoteId + 1}`}><a>คำคมถัดไป</a></Link>
-    //         </button>
-    //     )
-    // }
+    nextQuote = (
+        <button className={'absolute bottom-0 right-0 m-10 ' + navNextButton}>
+            <Link href={`/quotes/${quoteId + 1}`}><a>คำคมถัดไป</a></Link>
+        </button>
+    )
+
     if (prevQuote) {
         prevQuote = (
             <button className={'absolute bottom-0 left-0 m-10 ' + navPrevButton}>
@@ -36,8 +35,7 @@ export default function QuoteInfoCards({ quote, quoteId, name, date, category, p
                 <div className='flex space-x-5 my-5 mx-auto'>{categoryButtons}</div>
             </div>
             <div>
-                {prevQuote}
-                {/* {nextQuote} */}
+                {prevQuote} {nextQuote}
             </div>
         </div>
     )
