@@ -24,7 +24,7 @@ export default function index({ data, getTotalQuotes }) {
     const [hasMore, setHasMore] = useState(true)
 
     const getMoreQuotes = async () => {
-      const { newQuotes, error } = await useSWR(`/api/jokes/limit?` + new URLSearchParams({
+      const { newQuotes, error } = useSWR(`/api/jokes/limit?` + new URLSearchParams({
         start: getTotalQuotes - quotes.length,
         limit: 5
       }))
