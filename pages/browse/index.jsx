@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import useSWR from 'swr'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -8,10 +7,6 @@ import { getAllJokes, getLimitJokes } from '@utils/databaseQuery/findData'
 import LongQuoteInfoCard from '@components/LongQuoteInfoCard'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
-import NotFound from '../404'
-import Loading from '@components/Loading'
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function index({ data, getTotalQuotes }) {
   try {
@@ -26,13 +21,15 @@ export default function index({ data, getTotalQuotes }) {
     const [hasMore, setHasMore] = useState(true)
 
     const getMoreQuotes = async () => {
-      const { newQuotes, error } = useSWR(`/api/jokes/limit?` + new URLSearchParams({
+      // console.log(getTotalQuotes - data.length)
+      // console.log('Data Length: ' + data.length)
+      const res = await fetch(`https://quotes.phatsanphon.site/api/jokes/limit?` + new URLSearchParams({
         start: getTotalQuotes - quotes.length,
         limit: 5
-      }), fetcher)
+      }))
+      const newQuotes = await res.json()
 
-      if(error) { return <NotFound />}
-      if(!newQuotes) { return <Loading /> }
+      // console.log(newQuotes.data)
 
       setQuotes(quotes => [...quotes, ...newQuotes.data])
     }
@@ -48,16 +45,16 @@ export default function index({ data, getTotalQuotes }) {
         <div className={mainTailwindCSS}>
           <Header />
 
-          {quotes.map((quote) => {
-            return (
-              <LongQuoteInfoCard
-                key={quote.sentenceId} quote={quote.sentence}
-                name={quote.name} quoteId={quote.sentenceId} />
-            )
-          })}
-
-          <Footer />
-        </div>
+            {quotes.map((quote) => {
+              return (
+                <LongQuoteInfoCard
+                  key={quote.sentenceId} quote={quote.sentence}
+                  name={quote.name} quoteId={quote.sentenceId} />
+              )
+            })}
+             
+            <Footer />
+          </div>
       </InfiniteScroll>
     )
   } catch (err) {
