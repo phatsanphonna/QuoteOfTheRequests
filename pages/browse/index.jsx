@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import useSWR from 'swr'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -7,6 +8,8 @@ import { getAllJokes, getLimitJokes } from '@utils/databaseQuery/findData'
 import LongQuoteInfoCard from '@components/LongQuoteInfoCard'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function index({ data, getTotalQuotes }) {
   try {
@@ -21,16 +24,10 @@ export default function index({ data, getTotalQuotes }) {
     const [hasMore, setHasMore] = useState(true)
 
     const getMoreQuotes = async () => {
-      // console.log(getTotalQuotes - data.length)
-      // console.log('Data Length: ' + data.length)
-      const res = await fetch(`https://quote-of-the-request-ssuniie.vercel.app/api/jokes/limit?`\
-        + new URLSearchParams({
-          start: getTotalQuotes - quotes.length,
-          limit: 5
-        }))
-      const newQuotes = await res.json()
-
-      // console.log(newQuotes.data)
+      const { newQuotes, error } = await useSWR(`/api/jokes/limit?` + new URLSearchParams({
+        start: getTotalQuotes - quotes.length,
+        limit: 5
+      }))
 
       setQuotes(quotes => [...quotes, ...newQuotes.data])
     }
