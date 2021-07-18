@@ -10,9 +10,6 @@ export async function getJokes(quoteId) {
         const sentence = await Sentence.findOne({ sentenceId: Number(quoteId) })
         const sentenceCategory = enumToStringCategory(sentence.category)
 
-        // console.log('Sentence : ' + sentence)
-        // console.log('Sentence Category : ' + sentence.category);
-
         return {
             sentenceId: sentence.sentenceId,
             sentence: sentence.sentence,

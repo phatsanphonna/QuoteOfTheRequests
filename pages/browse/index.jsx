@@ -24,10 +24,13 @@ export default function index({ data, getTotalQuotes }) {
     const [hasMore, setHasMore] = useState(true)
 
     const getMoreQuotes = async () => {
-      const { newQuotes, error } = useSWR(`/api/jokes/limit?` + new URLSearchParams({
-        start: getTotalQuotes - quotes.length,
-        limit: 5
-      }))
+      const res = await fetch(`https://quotes.phatsanphon.site/api/jokes/limit?` + new URLSearchParams({
+          start: getTotalQuotes - quotes.length,
+          limit: 5
+        }))
+      const newQuotes = await res.json()
+
+      // console.log(newQuotes.data)
 
       setQuotes(quotes => [...quotes, ...newQuotes.data])
     }
