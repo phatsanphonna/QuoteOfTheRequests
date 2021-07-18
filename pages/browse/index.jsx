@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -46,16 +45,16 @@ export default function index({ data, getTotalQuotes }) {
         <div className={mainTailwindCSS}>
           <Header />
 
-            {quotes.map((quote) => {
-              return (
-                <LongQuoteInfoCard
-                  key={quote.sentenceId} quote={quote.sentence}
-                  name={quote.name} quoteId={quote.sentenceId} />
-              )
-            })}
+          {quotes.map((quote) => {
+            return (
+              <LongQuoteInfoCard
+                key={quote.sentenceId} quote={quote.sentence}
+                name={quote.name} quoteId={quote.sentenceId} />
+            )
+          })}
 
-          </div>
           <Footer />
+        </div>
       </InfiniteScroll>
     )
   } catch (err) {
