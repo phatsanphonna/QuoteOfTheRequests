@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 export default function QuoteInfoCards({ quote, name, quoteId }) {
-  if (quote.length > 35) {
+  if (quote.length > 41) {
     quote = quote.slice(0, 41) + '...'
   }
 
